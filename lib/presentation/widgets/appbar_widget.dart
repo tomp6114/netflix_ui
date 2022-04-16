@@ -9,7 +9,7 @@ class AppBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 50.0),
+      padding: const EdgeInsets.only(top: 55.0),
       child: Row(
         children: [
           kWidht,
@@ -26,9 +26,12 @@ class AppBarWidget extends StatelessWidget {
           ),
           kWidht,
           Container(
-            color: Colors.blue[300],
             width: 30,
             height: 30,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(2),
+              color: Color.fromARGB(255, 30, 92, 143),
+            ),
           ),
           kWidht,
         ],

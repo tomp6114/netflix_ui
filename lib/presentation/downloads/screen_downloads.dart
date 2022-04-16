@@ -9,85 +9,132 @@ import 'package:netflix_app/presentation/widgets/appbar_widget.dart';
 class DownloadsScreen extends StatelessWidget {
   DownloadsScreen({Key? key}) : super(key: key);
 
+  final _widgetList = [
+    const _SmartDownloads(),
+    Section2(),
+    const Section3(),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: backgroundColor,
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(50),
+          child: Padding(
+            padding: EdgeInsets.only(left: 10.0, right: 10.0),
+            child: AppBarWidget(
+              title: 'Downloads',
+            ),
+          ),
+        ),
+        body: ListView.separated(
+            padding: EdgeInsets.all(10),
+            itemBuilder: (ctx, index) => _widgetList[index],
+            separatorBuilder: (ctx, index) => SizedBox(height: 25),
+            itemCount: _widgetList.length));
+  }
+}
+
+class Section2 extends StatelessWidget {
+  Section2({Key? key}) : super(key: key);
   final imageList = [
     "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/vUUqzWa2LnHIVqkaKVlVGkVcZIW.jpg",
     "https://www.themoviedb.org/t/p/w300_and_h450_bestv2/x2LSRK2Cm7MZhjluni1msVJ3wDF.jpg",
     "https://www.themoviedb.org/t/p/w220_and_h330_face/cXUqtadGsIcZDWUTrfnbDjAy8eN.jpg"
   ];
-
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Scaffold(
-      backgroundColor: backgroundColor,
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(50),
-        child: AppBarWidget(
-          title: 'Downloads',
+    return Column(
+      children: [
+        Text(
+          'Introducing Downloads for you',
+          textAlign: TextAlign.center,
+          style: GoogleFonts.montserrat(
+              color: kWhiteColor, fontSize: 24, fontWeight: FontWeight.bold),
         ),
-      ),
-      body: ListView(
-        children: [
-          Row(
+        kHeight,
+        Text(
+            "We will download a personalised selection of\nmovies and shows for you, so there's\nalways something to watch on your\ndevice",
+            textAlign: TextAlign.center,
+            style: GoogleFonts.montserrat(fontSize: 16, color: Colors.grey)),
+        kHeight,
+        SizedBox(
+          width: size.width,
+          height: size.width,
+          child: Stack(
+            alignment: Alignment.center,
             children: [
-              kWidht,
-              Icon(
-                Icons.settings_outlined,
-                color: kWhiteColor,
+              CircleAvatar(
+                backgroundColor: Colors.grey.withOpacity(0.5),
+                radius: size.width * 0.4,
               ),
-              kWidht,
-              Text(
-                'Smart Downloads',
-                style: GoogleFonts.montserrat(fontSize: 15.0),
+              DownloadsImageWidget(
+                imageList: imageList[0],
+                angle: 20.0,
+                margin: EdgeInsets.only(left: 150, bottom: 29),
+                size: Size(size.width * 0.4, size.height * 0.29),
               ),
+              DownloadsImageWidget(
+                imageList: imageList[1],
+                angle: -20.0,
+                margin: EdgeInsets.only(
+                  right: 150,
+                  bottom: 29,
+                ),
+                size: Size(size.width * 0.4, size.height * 0.29),
+              ),
+              DownloadsImageWidget(
+                imageList: imageList[2],
+                angle: 0.0,
+                margin: EdgeInsets.only(bottom: 10),
+                size: Size(size.width * 0.43, size.height * 0.30),
+              )
             ],
           ),
-          Text('Introducing Downloads for you'),
-          Text(
-              'We will download a personalised selection of movies and shows for you, so there is always something to watch on your device'),
-          Container(
-            width: size.width,
-            height: size.width,
-            //color: kWhiteColor,
-            child: Stack(
-              alignment: Alignment.center,
-              children: [
-                CircleAvatar(
-                  backgroundColor: Color.fromARGB(255, 102, 100, 100),
-                  radius: size.width * 0.37,
+        ),
+      ],
+    );
+  }
+}
+
+class Section3 extends StatelessWidget {
+  const Section3({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 25.0),
+          child: SizedBox(
+            width: double.infinity,
+            child: MaterialButton(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(5)),
+              color: Color.fromARGB(255, 111, 79, 255),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 12.0),
+                child: Text(
+                  'Set Up',
+                  style: GoogleFonts.montserrat(
+                    color: kWhiteColor,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
-                DownloadsImageWidget(
-                  imageList: imageList[0],
-                  angle: 20.0,
-                  margin: EdgeInsets.only(left: 150,bottom: 29), size: Size(size.width*0.4, size.height*0.29),
-                ),
-                DownloadsImageWidget(
-                  imageList: imageList[1],
-                  angle: -20.0,
-                  margin: EdgeInsets.only(right: 150,bottom: 29,), size: Size(size.width*0.4, size.height*0.29),
-                ),
-                DownloadsImageWidget(
-                  imageList: imageList[2],
-                  angle: 0.0,
-                  margin: EdgeInsets.only(bottom: 10), size: Size(size.width*0.43, size.height*0.30),
-                )
-              ],
-            ),
-          ),
-          MaterialButton(
-            color: kButtonColorBlue,
-            child: Text(
-              'Set up',
-              style: GoogleFonts.montserrat(
-                color: kWhiteColor,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
               ),
+              onPressed: () {},
             ),
-            onPressed: () {},
           ),
-          MaterialButton(
-            color: kWhiteColor,
+        ),
+        kHeight,
+        MaterialButton(
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+          color: kWhiteColor,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10.0),
             child: Text(
               'See what you can download',
               style: GoogleFonts.montserrat(
@@ -96,8 +143,35 @@ class DownloadsScreen extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            onPressed: () {},
-          )
+          ),
+          onPressed: () {},
+        )
+      ],
+    );
+  }
+}
+
+class _SmartDownloads extends StatelessWidget {
+  const _SmartDownloads({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 10.0, bottom: 10),
+      child: Row(
+        children: [
+          kWidht,
+          const Icon(
+            Icons.settings_outlined,
+            color: kWhiteColor,
+          ),
+          kWidht,
+          Text(
+            'Smart Downloads',
+            style: GoogleFonts.montserrat(fontSize: 15.0),
+          ),
         ],
       ),
     );
@@ -105,13 +179,13 @@ class DownloadsScreen extends StatelessWidget {
 }
 
 class DownloadsImageWidget extends StatelessWidget {
-  const DownloadsImageWidget({
-    Key? key,
-    required this.imageList,
-    this.angle = 0,
-    required this.margin,
-    required this.size
-  }) : super(key: key);
+  const DownloadsImageWidget(
+      {Key? key,
+      required this.imageList,
+      this.angle = 0,
+      required this.margin,
+      required this.size})
+      : super(key: key);
 
   final String imageList;
   final double angle;
@@ -120,21 +194,19 @@ class DownloadsImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     return Transform.rotate(
       angle: angle * pi / 180,
       child: Container(
         margin: margin,
         width: size.width,
-        height: size.height, 
+        height: size.height,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(5),
           image: DecorationImage(
-            image: NetworkImage(
-              imageList,
-            ),
-            fit: BoxFit.cover
-          ),
+              image: NetworkImage(
+                imageList,
+              ),
+              fit: BoxFit.cover),
         ),
       ),
     );
