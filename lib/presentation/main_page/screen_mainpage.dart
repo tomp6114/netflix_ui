@@ -11,10 +11,10 @@ class ScreenMainPage extends StatelessWidget {
    ScreenMainPage({ Key? key }) : super(key: key);
 
   final _pages=[
-    HomeScreen(),
-    HotAndNewScreen(),
-    FastAndLaughsScreen(),
-    SearchScreen(),
+    const HomeScreen(),
+    const HotAndNewScreen(),
+    const FastAndLaughsScreen(),
+    const SearchScreen(),
     DownloadsScreen()
   ];
   @override
@@ -24,7 +24,7 @@ class ScreenMainPage extends StatelessWidget {
       body:ValueListenableBuilder(valueListenable: indexChangeNotifer, builder: (context,int index,_){
         return _pages[index];
       },),
-      bottomNavigationBar: BottomNavigation(),
+      bottomNavigationBar: const BottomNavigation(),
     );
   }
 }

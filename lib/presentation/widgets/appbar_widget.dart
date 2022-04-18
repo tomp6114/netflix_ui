@@ -30,7 +30,7 @@ class AppBarWidget extends StatelessWidget {
             height: 30,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(2),
-              color: Color.fromARGB(255, 30, 92, 143),
+              color: const Color.fromARGB(255, 30, 92, 143),
             ),
           ),
           kWidht,

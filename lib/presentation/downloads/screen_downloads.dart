@@ -29,9 +29,9 @@ class DownloadsScreen extends StatelessWidget {
           ),
         ),
         body: ListView.separated(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             itemBuilder: (ctx, index) => _widgetList[index],
-            separatorBuilder: (ctx, index) => SizedBox(height: 25),
+            separatorBuilder: (ctx, index) => const SizedBox(height: 25),
             itemCount: _widgetList.length));
   }
 }
@@ -68,28 +68,30 @@ class Section2 extends StatelessWidget {
             children: [
               CircleAvatar(
                 backgroundColor: Colors.grey.withOpacity(0.5),
-                radius: size.width * 0.4,
+                radius: size.width * 0.36,
               ),
               DownloadsImageWidget(
                 imageList: imageList[0],
                 angle: 20.0,
-                margin: EdgeInsets.only(left: 150, bottom: 29),
-                size: Size(size.width * 0.4, size.height * 0.29),
+                margin: const EdgeInsets.only(left: 170, bottom: 0),
+                size: Size(size.width * 0.35, size.height * 0.23),
               ),
               DownloadsImageWidget(
                 imageList: imageList[1],
                 angle: -20.0,
-                margin: EdgeInsets.only(
-                  right: 150,
-                  bottom: 29,
+                margin: const EdgeInsets.only(
+                  right: 170,
+                  bottom: 0,
                 ),
-                size: Size(size.width * 0.4, size.height * 0.29),
+                size: Size(size.width * 0.35, size.height * 0.23),
               ),
               DownloadsImageWidget(
                 imageList: imageList[2],
                 angle: 0.0,
-                margin: EdgeInsets.only(bottom: 10),
-                size: Size(size.width * 0.43, size.height * 0.30),
+                margin: const EdgeInsets.only(
+                  bottom: 20,
+                ),
+                size: Size(size.width * 0.35, size.height * 0.25),
               )
             ],
           ),
@@ -113,7 +115,7 @@ class Section3 extends StatelessWidget {
             child: MaterialButton(
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(5)),
-              color: Color.fromARGB(255, 111, 79, 255),
+              color: const Color.fromARGB(255, 111, 79, 255),
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 12.0),
                 child: Text(
@@ -194,19 +196,22 @@ class DownloadsImageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Transform.rotate(
-      angle: angle * pi / 180,
-      child: Container(
-        margin: margin,
-        width: size.width,
-        height: size.height,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(5),
-          image: DecorationImage(
-              image: NetworkImage(
-                imageList,
-              ),
-              fit: BoxFit.cover),
+    return Padding(
+      padding: margin,
+      child: Transform.rotate(
+        angle: angle * pi / 180,
+        child: Container(
+          // margin: ,
+          width: size.width,
+          height: size.height,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(5),
+            image: DecorationImage(
+                image: NetworkImage(
+                  imageList,
+                ),
+                fit: BoxFit.cover),
+          ),
         ),
       ),
     );

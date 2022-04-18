@@ -6,7 +6,7 @@ class HotAndNewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: backgroundColor,
       body: SafeArea(child: Center(child: Text('Hot and New'),)),
     );
