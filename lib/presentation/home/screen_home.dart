@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:netflix_app/core/colors/colors.dart';
 import 'package:netflix_app/core/contants/constants.dart';
-import 'package:netflix_app/presentation/home/widgets/number_card.dart';
-
-import '../widgets/main_card.dart';
-import '../widgets/main_title.dart';
+import 'package:netflix_app/presentation/home/widgets/background_card.dart';
 import '../widgets/main_title_card.dart';
 import 'widgets/number_title_card.dart';
+
+ValueNotifier<bool> scrollNotifier = ValueNotifier(true);
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -16,80 +16,114 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(10.0),
-          child: ListView(
-            children: [
-              Stack(
+      body: ValueListenableBuilder(
+        valueListenable: scrollNotifier,
+        builder: (BuildContext context, index, _) {
+          return NotificationListener<UserScrollNotification>(
+            onNotification: (notification) {
+              final ScrollDirection direction = notification.direction;
+              if (direction == ScrollDirection.reverse) {
+                scrollNotifier.value = false;
+              } else if (direction == ScrollDirection.forward) {
+                scrollNotifier.value = true;
+              }
+              print(">.........$direction");
+              return true;
+            },
+            child: SafeArea(
+              child: Stack(
                 children: [
-                  Container(
-                    height: 600,
-                    width: double.infinity,
-                    //color: Colors.blueAccent,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        //fit: BoxFit.cover,
-                        image: NetworkImage(kMainImage),
+                  ListView(
+                    children: [
+                      BackgroundCard(),
+                      kHeight,
+                      const MainTitleCard(
+                        title: 'Released in the past year',
                       ),
-                    ),
+                      kHeight,
+                      const MainTitleCard(
+                        title: 'Trending Now',
+                      ),
+                      kHeight,
+                      const NumberTitleCard(),
+                      kHeight,
+                      const MainTitleCard(
+                        title: 'Tense Dramas',
+                      ),
+                      kHeight,
+                      const MainTitleCard(
+                        title: 'South Indian Cenima',
+                      ),
+                      kHeight,
+                    ],
                   ),
-                  Positioned(
-                    bottom: 0,
-                    right: 0,
-                    left: 0,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        _playButton(),
-                      ],
-                    ),
-                  ),
+                  scrollNotifier.value == true
+                      ? AnimatedContainer(
+                        duration: const Duration(milliseconds: 1000),
+                          width: double.infinity,
+                          height: 95,
+                          color: Colors.black.withOpacity(0.3),
+                          child: Column(
+                            children: [
+                              Row(
+                                children: [
+                                  Image.network(
+                                    "https://cdn-images-1.medium.com/max/1200/1*ty4NvNrGg4ReETxqU2N3Og.png",
+                                    width: 70,
+                                    height: 70,
+                                  ),
+                                  Spacer(),
+                                  const Icon(
+                                    Icons.cast,
+                                    size: 30,
+                                    color: Colors.white,
+                                  ),
+                                  kWidht,
+                                  Container(
+                                    width: 30,
+                                    height: 30,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(2),
+                                      color: const Color.fromARGB(
+                                          255, 30, 92, 143),
+                                    ),
+                                  ),
+                                  kWidht,
+                                ],
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                children: [
+                                  Text(
+                                    "TV Show",
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Movies",
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                  Text(
+                                    "Categories",
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ],
+                              )
+                            ],
+                          ),
+                        )
+                      : kHeight
                 ],
               ),
-              kHeight,
-              MainTitleCard(
-                title: 'Released in the past year',
-              ),
-              kHeight,
-              MainTitleCard(
-                title: 'Trending Now',
-              ),
-              kHeight,
-              NumberTitleCard(),
-              kHeight,
-              MainTitleCard(
-                title: 'Tense Dramas',
-              ),
-              kHeight,
-              MainTitleCard(
-                title: 'South Indian Cenima',
-              ),
-              kHeight,
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  TextButton _playButton() {
-    return TextButton.icon(
-      style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all(kWhiteColor),
-      ),
-      onPressed: () {},
-      icon: Icon(
-        Icons.play_arrow,
-        color: kBlackColor,
-        size: 25,
-      ),
-      label: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Text(
-          "Play",
-          style: GoogleFonts.montserrat(color: kBlackColor, fontSize: 15),
-        ),
+            ),
+          );
+        },
       ),
     );
   }

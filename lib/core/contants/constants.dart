@@ -10,4 +10,4 @@ final BorderRadius kRadius10 =BorderRadius.circular(7);
 
 
 //Image 
-const kMainImage ="https://www.themoviedb.org/t/p/w300_and_h450_bestv2/bcCBq9N1EMo3daNIjWJ8kYvrQm6.jpg";
+const kMainImage ="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/beRjbWL5yQYf8ogZ3YHFmPAZTFQ.jpg";
