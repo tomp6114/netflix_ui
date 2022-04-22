@@ -8,9 +8,13 @@ class CustomButtonWidget extends StatelessWidget {
     Key? key,
     required this.icon,
     required this.text,
+    this.iconSize = 30,
+    this.textSize = 18,
   }) : super(key: key);
   final IconData icon;
   final String text;
+  final double iconSize;
+  final double textSize;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,11 +22,13 @@ class CustomButtonWidget extends StatelessWidget {
         Icon(
           icon,
           color: kWhiteColor,
-          size: 30,
+          size: iconSize,
         ),
         Text(
           text,
-          style: GoogleFonts.montserrat(),
+          style: GoogleFonts.montserrat(
+            fontSize: textSize,
+          ),
         )
       ],
     );

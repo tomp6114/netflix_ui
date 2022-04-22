@@ -34,24 +34,24 @@ class HomeScreen extends StatelessWidget {
               child: Stack(
                 children: [
                   ListView(
-                    children: [
+                    children: const [
                       BackgroundCard(),
                       kHeight,
-                      const MainTitleCard(
+                      MainTitleCard(
                         title: 'Released in the past year',
                       ),
                       kHeight,
-                      const MainTitleCard(
+                      MainTitleCard(
                         title: 'Trending Now',
                       ),
                       kHeight,
-                      const NumberTitleCard(),
+                      NumberTitleCard(),
                       kHeight,
-                      const MainTitleCard(
+                      MainTitleCard(
                         title: 'Tense Dramas',
                       ),
                       kHeight,
-                      const MainTitleCard(
+                      MainTitleCard(
                         title: 'South Indian Cenima',
                       ),
                       kHeight,
@@ -72,7 +72,7 @@ class HomeScreen extends StatelessWidget {
                                     width: 70,
                                     height: 70,
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   const Icon(
                                     Icons.cast,
                                     size: 30,
