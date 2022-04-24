@@ -11,6 +11,6 @@ final BorderRadius kRadius30 =BorderRadius.circular(30);
 
 
 //Image 
-const kMainImage ="https://www.themoviedb.org/t/p/w600_and_h900_bestv2/beRjbWL5yQYf8ogZ3YHFmPAZTFQ.jpg";
+const kMainImage ="https://www.movies-at.ie/wp-content/uploads/2021/12/The-Kings-Man.jpg";
 
 const kNewAndHotTempIMage ="https://www.themoviedb.org/t/p/w355_and_h200_multi_faces/1uegR4uAxRxiMyX4nQnpzbXhrTw.jpg";

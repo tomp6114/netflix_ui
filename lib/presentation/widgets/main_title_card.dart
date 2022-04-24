@@ -5,29 +5,45 @@ import 'main_card.dart';
 import 'main_title.dart';
 
 class MainTitleCard extends StatelessWidget {
-  const MainTitleCard({
-    Key? key,
-    required this.title
-  }) : super(key: key);
+  MainTitleCard(
+      {Key? key,
+      required this.title,
+      required this.getFuture,
+      required this.list})
+      : super(key: key);
   final String title;
+  final getFuture;
+  List list;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-         MainTitle(title: title),
+        MainTitle(title: title),
         kHeight,
         LimitedBox(
           maxHeight: 220,
-          child: ListView(
-            scrollDirection: Axis.horizontal,
-            children: List.generate(
-              10,
-              (index) => const MainCard(),
-            ),
+          child: FutureBuilder(
+            future: getFuture,
+            builder: (context, items) {
+              if (items.hasData) {
+                return ListView.separated(
+                  scrollDirection: Axis.horizontal,
+                    itemBuilder: (ctx, index) {
+                      String uri = list[index]['poster_path'];
+                      return MainCard(uri: uri,);
+                    },
+                    separatorBuilder: (ctx, index) => const SizedBox(
+                          width: 5,
+                        ),
+                    itemCount: list.length);
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
           ),
-        )
+        ),
       ],
     );
   }

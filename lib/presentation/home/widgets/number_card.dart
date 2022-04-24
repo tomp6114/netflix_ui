@@ -7,7 +7,8 @@ import '../../../core/contants/constants.dart';
 
 class NumberCard extends StatelessWidget {
   final int? index;
-  const NumberCard({Key? key, required this.index}) : super(key: key);
+  final String uri;
+  const NumberCard({Key? key, required this.index,required this.uri}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +25,11 @@ class NumberCard extends StatelessWidget {
               width: 150,
               decoration: BoxDecoration(
                 borderRadius: kRadius10,
-                image: const DecorationImage(
+                image:  DecorationImage(
                   fit: BoxFit.cover,
                   image: NetworkImage(
-                    "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/3VFI3zbuNhXzx7dIbYdmvBLekyB.jpg",
+                    'http://image.tmdb.org/t/p/w500' +
+                                                uri,
                   ),
                 ),
               ),
@@ -47,7 +49,7 @@ class NumberCard extends StatelessWidget {
                   color: kBlackColor,
                   fontWeight: FontWeight.bold,
                   decoration: TextDecoration.none,
-                  decorationColor: Color.fromARGB(255, 61, 126, 48)),
+                  decorationColor: const Color.fromARGB(255, 61, 126, 48)),
             ),
           ),
         ),

@@ -18,7 +18,7 @@ class BackgroundCard extends StatelessWidget {
           //color: Colors.blueAccent,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              //fit: BoxFit.cover,
+              fit: BoxFit.cover,
               image: NetworkImage(kMainImage),
             ),
           ),
@@ -30,9 +30,9 @@ class BackgroundCard extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              const CustomButtonWidget(icon: Icons.add, text: "My List"),
+              const CustomButtonWidget(icon: Icons.add, text: "My List",textSize: 15,),
               _playButton(),
-              const CustomButtonWidget(icon: Icons.info_outline, text: "Info"),
+              const CustomButtonWidget(icon: Icons.info_outline, text: "Info",textSize: 15,),
             ],
           ),
         ),

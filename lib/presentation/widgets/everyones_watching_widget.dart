@@ -7,12 +7,64 @@ import '../home/widgets/custom_button_widget.dart';
 import 'video_widget.dart';
 
 class EveryonesWatchingWidget extends StatelessWidget {
-  const EveryonesWatchingWidget({
+    EveryonesWatchingWidget({
     Key? key,
+    required this.index,
+      required this.month,
+      required this.day,
+      required this.movieList
   }) : super(key: key);
+  final index;
+  String month;
+  String? monthFormate;
+  List movieList;
+  final day;
 
   @override
   Widget build(BuildContext context) {
+    String uri = movieList[index]['poster_path'];
+    // String movieNameImg = movieList[index]['backdrop_path'];
+    switch (month) {
+      case "01":
+        monthFormate = "Jan";
+        break;
+      case "02":
+        monthFormate = "Feb";
+        break;
+      case "03":
+        monthFormate = "Mar";
+        break;
+      case "04":
+        monthFormate = "Apr";
+        break;
+      case "05":
+        monthFormate = "May";
+        break;
+      case "06":
+        monthFormate = "Jun";
+        break;
+      case "07":
+        monthFormate = "Jul";
+        break;
+      case "08":
+        monthFormate = "Aug";
+        break;
+      case "09":
+        monthFormate = "Sep";
+        break;
+      case "10":
+        monthFormate = "Oct";
+        break;
+      case "11":
+        monthFormate = "Nov";
+        break;
+      case "12":
+        monthFormate = "Dec";
+        break;
+      default:
+        monthFormate = "January";
+    }
+
     return Padding(
       padding: const EdgeInsets.only(left: 8.0, right: 8.0),
       child: Column(
@@ -20,7 +72,7 @@ class EveryonesWatchingWidget extends StatelessWidget {
         children: [
           kHeight,
           Text(
-            "Friends",
+            movieList[index]['original_title'],
             style: GoogleFonts.montserrat(
               fontSize: 20,
               fontWeight: FontWeight.bold,
@@ -28,13 +80,13 @@ class EveryonesWatchingWidget extends StatelessWidget {
           ),
           kHeight,
           Text(
-            "This hit sitcom follows the merry misadventures of six 20-something pals as they navigate pitfalls of work,life and love in 1990's Manhattan.",
+            movieList[index]['overview'],
             style: GoogleFonts.montserrat(
               color: kGreyColor,
             ),
           ),
-          kHeight20,
-          const VideoWidget(),
+          kHeight,
+            VideoWidget(uri: uri,),
           kHeight,
           Row(
             mainAxisAlignment: MainAxisAlignment.end,

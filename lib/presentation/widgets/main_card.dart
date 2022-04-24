@@ -5,7 +5,9 @@ import '../../core/contants/constants.dart';
 class MainCard extends StatelessWidget {
   const MainCard({
     Key? key,
+    required this.uri
   }) : super(key: key);
+  final String uri;
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +18,10 @@ class MainCard extends StatelessWidget {
         width: 150,
         decoration:  BoxDecoration(
           borderRadius: kRadius10,
-          image: const DecorationImage(
+          image:  DecorationImage(
             fit: BoxFit.cover,
             image: NetworkImage(
-              "https://www.themoviedb.org/t/p/w600_and_h900_bestv2/cOkx3uu5FVgC902Q6Y3MxLpBWbX.jpg",
+              'http://image.tmdb.org/t/p/w500' + uri,
             ),
           ),
         ),

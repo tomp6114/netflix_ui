@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:netflix_app/core/colors/colors.dart';
-import 'package:netflix_app/core/contants/constants.dart';
 
+
+import '../../../data/datas.dart';
+
+// ignore: must_be_immutable
 class VideoListItem extends StatelessWidget {
   int index;
   VideoListItem({Key? key, required this.index}) : super(key: key);
@@ -11,8 +14,22 @@ class VideoListItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-          color: Colors.accents[index % Colors.accents.length],
+        FutureBuilder(
+          future: getUpComming(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              String uri = upcomingList[index]['poster_path'];
+              return Container(
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                  fit: BoxFit.fill,
+                  image: NetworkImage('http://image.tmdb.org/t/p/w500' + uri),
+                )),
+              );
+            } else {
+              return const Center(child: CircularProgressIndicator());
+            }
+          },
         ),
         Align(
           alignment: Alignment.bottomCenter,

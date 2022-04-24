@@ -20,8 +20,10 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(color: Colors.white),
         ),
         primarySwatch: Colors.blue,
-        backgroundColor: Colors.black,
+        backgroundColor: const Color.fromARGB(255, 0, 0, 0),
+        
       ),
+      
       home: ScreenMainPage(),
     );
   }

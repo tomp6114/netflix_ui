@@ -37,8 +37,13 @@ dependencies:
   google_fonts: ^2.3.1
   video_player: ^2.3.0
   bordered_text: ^2.0.0
+  tmdb_api: ^2.1.0
+  http: ^0.13.4
+  json_annotation: 4.4.0
+  json_serializable: 6.1.6
 
 dev_dependencies:
+  flutter_lints: ^1.0.0
   flutter_test:
     sdk: flutter
 
@@ -47,7 +52,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^1.0.0
+  
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

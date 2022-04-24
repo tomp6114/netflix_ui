@@ -8,7 +8,15 @@ const imageUrl =
     'https://www.themoviedb.org/t/p/w250_and_h141_face/vIgyYkXkg6NC2whRbYjBD7eb3Er.jpg';
 
 class SearchIdleWidget extends StatelessWidget {
-  const SearchIdleWidget({Key? key}) : super(key: key);
+  SearchIdleWidget(
+      {Key? key,
+      required this.getFuture,
+      required this.list,
+      required this.title})
+      : super(key: key);
+  final String title;
+  final getFuture;
+  List list;
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +25,19 @@ class SearchIdleWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SearchlistTitle(title: 'Top Searches',),
+          const SearchlistTitle(
+            title: 'Top Searches',
+          ),
           kHeight,
           Expanded(
             child: ListView.separated(
               shrinkWrap: true,
-              itemBuilder: (ctx, index) => const TopSearchTile(),
+              itemBuilder: (ctx, index) {
+                String uri = list[index]['poster_path'];
+                return TopSearchTile(uri: uri,list:list,index:index);
+              },
               separatorBuilder: (ctx, index) => kHeight,
-              itemCount: 10,
+              itemCount: list.length,
             ),
           )
         ],
@@ -33,12 +46,16 @@ class SearchIdleWidget extends StatelessWidget {
   }
 }
 
-
-
 class TopSearchTile extends StatelessWidget {
-  const TopSearchTile({
+   TopSearchTile({
     Key? key,
+    required this.uri,
+    required this.list,
+    required this.index,
   }) : super(key: key);
+  final String uri;
+   List list;
+  final int index;
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -49,9 +66,9 @@ class TopSearchTile extends StatelessWidget {
           height: 70,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(5),
-            image: const DecorationImage(
+            image:  DecorationImage(
                 image: NetworkImage(
-                  imageUrl,
+                  'http://image.tmdb.org/t/p/w500' + uri,
                 ),
                 fit: BoxFit.cover),
           ),
@@ -60,7 +77,7 @@ class TopSearchTile extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.only(left: 20.0),
             child: Text(
-              'Hello',
+              list[index]['original_title'].toString(),
               style: GoogleFonts.montserrat(
                 color: kWhiteColor,
                 fontWeight: FontWeight.w400,

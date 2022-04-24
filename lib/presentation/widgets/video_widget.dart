@@ -4,9 +4,11 @@ import '../../core/colors/colors.dart';
 import '../../core/contants/constants.dart';
 
 class VideoWidget extends StatelessWidget {
-  const VideoWidget({
+   const VideoWidget({
     Key? key,
+    required this.uri,
   }) : super(key: key);
+  final  String uri;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,7 @@ class VideoWidget extends StatelessWidget {
           width: double.infinity,
           height: 200,
           child: Image.network(
-            kNewAndHotTempIMage,
+            'http://image.tmdb.org/t/p/w500' + uri,
             fit: BoxFit.cover,
           ),
         ),
